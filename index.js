@@ -1,5 +1,6 @@
 'use strict';
 
-const app = require('./src/app');
+require('dotenv').config();
 
-app.listen(4000);
+const port = process.env.PORT || 4000;
+require('./src/app').listen(port);

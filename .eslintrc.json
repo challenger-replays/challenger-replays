@@ -8,5 +8,8 @@
         "ecmaFeatures": {
         }
     },
-    "extends": "airbnb-base"
+    "extends": "airbnb-base",
+    "rules": {
+        "yoda": "off"
+    }
 }
