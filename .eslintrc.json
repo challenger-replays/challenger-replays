@@ -1,0 +1,12 @@
+{
+    "env": {
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "script",
+        "ecmaFeatures": {
+        }
+    },
+    "extends": "airbnb-base"
+}
