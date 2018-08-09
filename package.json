@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./index.js ./src",
-    "start": "opn http://localhost:4000/ && nodemon ./index.js",
+    "start": "opn http://localhost:4000/ && nodemon --inspect ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maxim Belsky",
@@ -18,6 +18,7 @@
     "opn-cli": "^3.1.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "dotenv": "^6.0.0",
     "koa": "^2.5.2",
     "koa-router": "^7.4.0"
