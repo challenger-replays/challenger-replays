@@ -1,30 +1,31 @@
-'use strict';
+import * as dates from '../../utils/dates';
+import { PlaylistItems, PlaylistSnippets, Snippet } from '../types';
 
-const dates = require('../../utils/dates');
-
-function isFresh(item) {
+function isFresh(item: Snippet) {
   const publishedAt = dates.parseYoutubeDate(item);
-  const deltaInDays = (Date.now() - publishedAt) / (1000 * 60 * 60 * 24);
+  const deltaInDays = (Date.now() - publishedAt.getMilliseconds()) / (1000 * 60 * 60 * 24);
   return deltaInDays < 6;
 }
 
-module.exports = function Feed(playlistsItems = [], length = 12) {
+export default function Feed(this: any, playlistsItems: PlaylistItems[] = [], length = 12) {
   if (!(this instanceof Feed)) {
     throw new TypeError('Feed is a constructor');
   }
-  const playlists = playlistsItems
+
+  const playlists: PlaylistSnippets[] = playlistsItems
     .filter(playlist => (playlist.items || []).length > 0)
-    .map((playlist) => { // Remove 'snippet' wrapper
-      const items = playlist.items.map(item => ({
+    .map(playlist => { // Remove 'snippet' wrapper
+      const snippets = playlist.items.map(item => ({
         ...item.snippet,
         description: undefined,
         playlistId: undefined,
         position: undefined,
       }));
       return {
-        items,
+        items : snippets,
       };
     });
+
   if (0 === playlists.length) {
     throw new TypeError(`Invalid 'playlistsItems' argument: ${playlistsItems}`);
   }
@@ -38,7 +39,7 @@ module.exports = function Feed(playlistsItems = [], length = 12) {
     .filter(item => isFresh(item));
 
   const tails = playlists.map(playlist => playlist.items.slice(1));
-  const extras = []
+  const extras = ([] as Snippet[])
     .concat(...tails)
     .sort(dateDescComparator);
 
@@ -47,4 +48,4 @@ module.exports = function Feed(playlistsItems = [], length = 12) {
     .splice(0, length)
     .sort(dateDescComparator);
   this.items = [...items];
-};
+}

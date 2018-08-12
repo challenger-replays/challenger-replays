@@ -1,4 +1,4 @@
-interface Dated {
+export interface Dated {
   publishedAt: string;
 }
 
