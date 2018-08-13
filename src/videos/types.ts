@@ -17,3 +17,15 @@ export interface PlaylistItem {
 export interface PlaylistItems {
   items: PlaylistItem[];
 }
+
+export interface PlaylistIdsList {
+  items: UploadsPlaylistId[];
+}
+
+export interface UploadsPlaylistId {
+  contentDetails: {
+    relatedPlaylists: {
+      uploads: string;
+    },
+  };
+}

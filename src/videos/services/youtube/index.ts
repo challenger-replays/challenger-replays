@@ -1,7 +1,6 @@
-'use strict';
-
-const core = require('./core');
-const { Feed } = require('../../adapters');
+import { Feed } from '../../adapters';
+import { PlaylistIdsList } from '../../types';
+import * as core from './core';
 
 const CHANNEL_IDS = [
   'UCag4Obh282jX7jHPqWqQmkQ', // LOL Replays Collection
@@ -14,7 +13,7 @@ const CHANNEL_IDS = [
   'UCejjkETjJXop6MP8eMjYL3g', // Bjergsen Stream
 ];
 
-async function playlistsLatestItemsList(playlistIds = []) {
+async function playlistsLatestItemsList(playlistIds: string[] = []) {
   if (0 === playlistIds.length) {
     return [];
   }
@@ -27,7 +26,7 @@ async function playlistsLatestItemsList(playlistIds = []) {
     }));
     const playlistsItemsList = (await Promise.all(promises))
       .map(response => response.data);
-    return new Feed(playlistsItemsList);
+    return Feed.parse(playlistsItemsList);
   } catch (e) {
     throw e;
   }
@@ -39,13 +38,13 @@ async function uploadsPlaylistsIdList(channelIds = []) {
   }
 
   try {
-    const response = await core.channelsList({
+    const response = await core.channelsList<PlaylistIdsList>({
       part: 'contentDetails',
       id: channelIds.join(','),
       fields: 'items/contentDetails/relatedPlaylists/uploads',
     });
 
-    const uploadsPlaylistsId = response.data.items.map((item) => {
+    const uploadsPlaylistsId = response.data.items.map(item => {
       try {
         return item.contentDetails.relatedPlaylists.uploads;
       } catch (_) {
@@ -59,8 +58,8 @@ async function uploadsPlaylistsIdList(channelIds = []) {
   }
 }
 
-module.exports = {
-  channelIds: CHANNEL_IDS,
+export {
+  CHANNEL_IDS as channelIds,
   playlistsLatestItemsList,
   uploadsPlaylistsIdList,
 };
