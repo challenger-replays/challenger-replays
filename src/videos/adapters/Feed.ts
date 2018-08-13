@@ -7,7 +7,7 @@ function isFresh(item: Snippet) {
   return deltaInDays < 6;
 }
 
-export default class Feed {
+export class Feed {
   public readonly items: Snippet[];
 
   public static parse(playlistsItems: PlaylistItems[] = [], length = 12): Feed {

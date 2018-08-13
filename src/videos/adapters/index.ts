@@ -1,3 +1,3 @@
-import Feed from './Feed';
+// import Feed from './Feed';
 
-export { Feed };
+export * from './Feed';
