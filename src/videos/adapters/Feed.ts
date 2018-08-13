@@ -50,7 +50,7 @@ export default class Feed {
       return new Feed(items);
   }
 
-  constructor(items: Snippet[]) {
+  constructor(items: Snippet[] = []) {
     this.items = [...items];
   }
 }

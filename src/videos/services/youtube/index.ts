@@ -15,7 +15,7 @@ const CHANNEL_IDS = [
 
 async function playlistsLatestItemsList(playlistIds: string[] = []) {
   if (0 === playlistIds.length) {
-    return [];
+    return new Feed();
   }
 
   try {
@@ -32,7 +32,7 @@ async function playlistsLatestItemsList(playlistIds: string[] = []) {
   }
 }
 
-async function uploadsPlaylistsIdList(channelIds = []) {
+async function uploadsPlaylistsIdList(channelIds: string[] = []): Promise<string[]> {
   if (0 === channelIds.length) {
     return [];
   }
@@ -44,13 +44,15 @@ async function uploadsPlaylistsIdList(channelIds = []) {
       fields: 'items/contentDetails/relatedPlaylists/uploads',
     });
 
-    const uploadsPlaylistsId = response.data.items.map(item => {
+    const uploadsPlaylistsId: string[] = response.data.items
+    .map(item => {
       try {
         return item.contentDetails.relatedPlaylists.uploads;
       } catch (_) {
         return undefined;
       }
-    }).filter(item => Boolean(item));
+    })
+    .filter(item => Boolean(item)) as string[];
 
     return uploadsPlaylistsId;
   } catch (e) {
