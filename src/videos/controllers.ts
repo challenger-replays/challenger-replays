@@ -1,5 +1,10 @@
 import Router, { IRouterContext } from 'koa-router';
-import { channelIds, playlistsLatestItemsList, uploadsPlaylistsIdList } from './services/youtube';
+import {
+  channelIds,
+  playlistsLatestItemsList,
+  search as youtubeSearch,
+  uploadsPlaylistsIdList,
+} from './services/youtube';
 
 async function feed(ctx: IRouterContext) {
   const ids = await uploadsPlaylistsIdList(channelIds);
@@ -8,8 +13,9 @@ async function feed(ctx: IRouterContext) {
 }
 
 async function search(ctx: IRouterContext) {
-  const { offset = 0, q: query } = ctx.query;
-  ctx.body = `Page ${offset}: ${query}`;
+  const { q: query } = ctx.query;
+  const searchResult = await youtubeSearch(channelIds, query);
+  ctx.body = JSON.stringify(searchResult, null, 2);
 }
 
 const videos = new Router()

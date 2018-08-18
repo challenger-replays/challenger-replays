@@ -1,5 +1,10 @@
 import { Dated } from '../utils/dates';
 
+interface VideoItemId {
+  kind: string;
+  videoId: string;
+}
+
 interface Snippet extends Dated {
   channelId: string;
   channelTitle: string;
@@ -26,6 +31,18 @@ export interface PlaylistItems {
 
 export interface PlaylistIdsList {
   items: UploadsPlaylistId[];
+}
+
+export interface SearchResultItems {
+  items: SearchResultItem[];
+}
+
+export interface SearchResultItem {
+  id: VideoItemId;
+  snippet: SearchSnippet;
+}
+
+export interface SearchSnippet extends Snippet {
 }
 
 export interface UploadsPlaylistId {
