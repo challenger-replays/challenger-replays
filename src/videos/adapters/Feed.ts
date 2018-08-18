@@ -1,14 +1,14 @@
 import * as dates from '../../utils/dates';
-import { PlaylistItems, PlaylistSnippets, Snippet } from '../types';
+import { PlaylistItems, PlaylistSnippet, PlaylistSnippets } from '../types';
 
-function isFresh(item: Snippet) {
+function isFresh(item: dates.Dated) {
   const publishedAt = dates.parseYoutubeDate(item);
   const deltaInDays = (Date.now() - publishedAt.getMilliseconds()) / (1000 * 60 * 60 * 24);
   return deltaInDays < 6;
 }
 
 export class Feed {
-  public readonly items: Snippet[];
+  public readonly items: PlaylistSnippet[];
 
   public static parse(playlistsItems: PlaylistItems[] = [], length = 12): Feed {
       const playlists: PlaylistSnippets[] = playlistsItems
@@ -38,7 +38,7 @@ export class Feed {
         .filter(item => isFresh(item));
 
       const tails = playlists.map(playlist => playlist.items.slice(1));
-      const extras = ([] as Snippet[])
+      const extras = ([] as PlaylistSnippet[])
         .concat(...tails)
         .sort(dateDescComparator);
 
@@ -50,7 +50,7 @@ export class Feed {
       return new Feed(items);
   }
 
-  constructor(items: Snippet[] = []) {
+  constructor(items: PlaylistSnippet[] = []) {
     this.items = [...items];
   }
 }
