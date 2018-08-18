@@ -27,12 +27,10 @@ async function request<T>(url: string, params = {}, method = 'get') {
   }
 }
 
-export async function channelsList<T>(params?: {}) {
-  const response = await request<T>('/channels', params);
-  return response;
+export function channelsList<T>(params?: {}) {
+  return request<T>('/channels', params);
 }
 
-export async function playlistItemsList(params?: {}) {
-  const response = await request<PlaylistItems>('/playlistItems', params);
-  return response;
+export function playlistItemsList(params?: {}) {
+  return request<PlaylistItems>('/playlistItems', params);
 }
