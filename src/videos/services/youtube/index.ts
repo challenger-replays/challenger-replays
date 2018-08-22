@@ -36,7 +36,7 @@ export async function search(channelIds: string[] = [], query: string) {
       .map(response => response.data)
       .reduce((result, searchResult) => result.concat(searchResult.items), ([] as SearchResultItem[]));
 
-    const compareDates = compareYoutubeDates();
+    const compareDates = compareYoutubeDates('desc');
     searchResults.sort((lhs, rhs) => {
       return compareDates(lhs.snippet, rhs.snippet);
     });

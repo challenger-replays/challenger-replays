@@ -19,6 +19,6 @@ export function compareYoutubeDates(order = 'asc') {
     const lhsDate = parseYoutubeDate(lhs);
     const rhsDate = parseYoutubeDate(rhs);
 
-    return orderSign * (lhsDate.getMilliseconds() - rhsDate.getMilliseconds());
+    return orderSign * (lhsDate.getTime() - rhsDate.getTime());
   };
 }
