@@ -12,9 +12,21 @@ async function search(ctx: IRouterContext) {
   const { q: query } = ctx.query;
   const searchResult = await dataSource.getSearchResult(query);
   ctx.body = JSON.stringify(searchResult, null, 2);
+  ctx.set({
+    Connection: 'keep-alive',
+  });
 }
 
 const videos = new Router()
+  .use(async (ctx, next) => {
+    await next();
+    ctx.set({
+      'Connection': 'close',
+      ...ctx.response.header,
+      'Content-Language': 'en-US',
+      'Content-Type': 'application/json; charset=utf-8',
+    });
+  })
   .get('/feed', feed)
   .get('/search', search);
 
