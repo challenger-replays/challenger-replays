@@ -21,9 +21,13 @@ export class DataSource {
   }
 
   public async getFeed(): Promise<Feed> {
-    const cache = await cacheController.get<Feed>(KEY_FEED);
-    if (cache) {
-      return cache;
+    try {
+      const cache = await cacheController.get<Feed>(KEY_FEED);
+      if (cache) {
+        return cache;
+      }
+     } catch (e) {
+      console.error(e);
     }
 
     const queue = this.cacheQueue.feed;
