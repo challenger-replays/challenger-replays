@@ -1,6 +1,6 @@
 import { redisClientInstance as cacheController } from '../../../services/redis';
 import { Feed } from '../../adapters';
-import { SearchResultItem } from '../../types';
+import { SearchListItem } from '../../types';
 import { channelIds, playlistsLatestItemsList, search, uploadsPlaylistsIdList } from '../youtube';
 
 const KEY_FEED = 'challenger-replays/videos/feed';
@@ -55,12 +55,12 @@ export class DataSource {
     return promise;
   }
 
-  public async getSearchResult(query: string, offset = 0, resultsPerPage = 10): Promise<SearchResultItem[]> {
+  public async getSearchResult(query: string, offset = 0, resultsPerPage = 10): Promise<SearchListItem[]> {
     const key = `${KEY_SEARCH}:${query}`;
     const end = offset + resultsPerPage;
 
     try {
-      const cache = await cacheController.lrange<SearchResultItem>(key, offset, end);
+      const cache = await cacheController.lrange<SearchListItem>(key, offset, end);
       if (cache && 0 < cache.length) {
         return cache;
       }
@@ -69,7 +69,7 @@ export class DataSource {
     }
 
     const queue = this.cacheQueue[key] || [];
-    const promise = new Promise<SearchResultItem[]>((resolve, reject) => queue.push({resolve, reject}));
+    const promise = new Promise<SearchListItem[]>((resolve, reject) => queue.push({resolve, reject}));
 
     if (1 === queue.length) {
       try {

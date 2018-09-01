@@ -2,7 +2,7 @@ export { channelIds } from './constants';
 
 import { compareYoutubeDates } from '../../../utils/dates';
 import { Feed } from '../../adapters';
-import { PlaylistIdsList, SearchResultItem } from '../../types';
+import { SearchListItem } from '../../types';
 import * as constants from './constants';
 import * as core from './core';
 
@@ -34,14 +34,12 @@ export async function search(channelIds: string[] = [], query: string) {
 
     const searchResults = (await Promise.all(promises))
       .map(response => response.data)
-      .reduce((result, searchResult) => result.concat(searchResult.items), ([] as SearchResultItem[]));
+      .reduce((result, searchResult) => result.concat(searchResult.items), new Array<SearchListItem>());
 
     const compareDates = compareYoutubeDates('desc');
     searchResults.sort((lhs, rhs) => {
       return compareDates(lhs.snippet, rhs.snippet);
     });
-
-    // Cache response for query
 
     return searchResults;
   } catch (e) {
@@ -55,20 +53,20 @@ export async function uploadsPlaylistsIdList(channelIds: string[] = []): Promise
   }
 
   try {
-    const response = await core.channelsList<PlaylistIdsList>({
+    const response = await core.channelsList({
       ...constants.uploadsPlaylistsIdListDefaultParams,
       id: channelIds.join(','),
     });
 
     const uploadsPlaylistsId: string[] = response.data.items
-    .map(item => {
-      try {
-        return item.contentDetails.relatedPlaylists.uploads;
-      } catch (_) {
-        return undefined;
-      }
-    })
-    .filter(item => Boolean(item)) as string[];
+      .map(item => {
+        try {
+          return item.contentDetails.relatedPlaylists.uploads;
+        } catch (_) {
+          return undefined;
+        }
+      })
+      .filter(item => 'string' === typeof item) as string[];
 
     return uploadsPlaylistsId;
   } catch (e) {

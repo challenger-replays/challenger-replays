@@ -1,5 +1,11 @@
 import * as dates from '../../utils/dates';
-import { PlaylistItems, PlaylistSnippet, PlaylistSnippets } from '../types';
+import {
+  BaseSnippet,
+  PlaylistItemList,
+  PlaylistItemListItem,
+  Snippet,
+  Thumbnail,
+} from '../types';
 
 function isFresh(item: dates.Dated) {
   const publishedAt = dates.parseYoutubeDate(item);
@@ -7,50 +13,67 @@ function isFresh(item: dates.Dated) {
   return deltaInDays < 6;
 }
 
+function mapItemThumbnails(snippet: BaseSnippet): Thumbnail {
+  const { thumbnails } = snippet;
+  return Object.keys(thumbnails)
+    .map(key => {
+      const { width } = thumbnails[key];
+      return { [width]: thumbnails[key].url};
+    })
+    .reduce((accum, value) => ({
+      ...accum,
+      ...value,
+    }), {});
+}
+
+function mapItemToSnippet(item: PlaylistItemListItem): Snippet {
+  const { snippet } = item;
+  const { channelId, channelTitle, title, publishedAt } = snippet;
+  const { videoId } = snippet.resourceId;
+  return {
+    channelId,
+    channelTitle,
+    publishedAt,
+    title,
+    thumbnails: mapItemThumbnails(snippet),
+    videoId,
+  };
+}
+
 export class Feed {
-  public readonly items: PlaylistSnippet[];
+  public readonly items: Snippet[];
 
-  public static parse(playlistsItems: PlaylistItems[] = [], length = 12): Feed {
-      const playlists: PlaylistSnippets[] = playlistsItems
+  public static parse(playlistsItems: PlaylistItemList[] = [], length = 12): Feed {
+      const snippetsList = playlistsItems
         .filter(playlist => (playlist.items || []).length > 0)
-        .map(playlist => { // Remove 'snippet' wrapper
-          const snippets = playlist.items.map(item => ({
-            ...item.snippet,
-            description: undefined,
-            playlistId: undefined,
-            position: undefined,
-          }));
-          return {
-            items : snippets,
-          };
-        });
+        .map(playlist => playlist.items.map(mapItemToSnippet));
 
-      if (0 === playlists.length) {
+      if (0 === snippetsList.length) {
         throw new TypeError(`Invalid 'playlistsItems' argument: ${playlistsItems}`);
       }
 
       const dateDescComparator = dates.compareYoutubeDates('desc');
 
-      playlists.forEach(playlist => playlist.items.sort(dateDescComparator));
+      snippetsList.forEach(snippets => snippets.sort(dateDescComparator));
 
-      const necessary = playlists
-        .map(playlist => playlist.items[0])
+      const necessary = snippetsList
+        .map(snippets => snippets[0])
         .filter(item => isFresh(item));
 
-      const tails = playlists.map(playlist => playlist.items.slice(1));
-      const extras = ([] as PlaylistSnippet[])
+      const tails = snippetsList.map(snippets => snippets.slice(1));
+      const extras = new Array<Snippet>()
         .concat(...tails)
         .sort(dateDescComparator);
 
       const items = necessary
         .concat(extras)
-        .splice(0, length)
+        .slice(0, length)
         .sort(dateDescComparator);
 
       return new Feed(items);
   }
 
-  constructor(items: PlaylistSnippet[] = []) {
+  constructor(items: Snippet[] = []) {
     this.items = [...items];
   }
 }

@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { PlaylistItems, SearchResultItems } from '../../types';
+import { ChannelList, PlaylistItemList, SearchList } from '../../types';
 
 const { YOUTUBE_DATA_API_KEY: API_KEY } = process.env;
 if ('string' !== typeof API_KEY || 0 === API_KEY.length) {
@@ -27,14 +27,14 @@ async function request<T>(url: string, params = {}, method = 'get') {
   }
 }
 
-export function channelsList<T>(params?: {}) {
-  return request<T>('/channels', params);
+export function channelsList(params?: {}) {
+  return request<ChannelList>('/channels', params);
 }
 
 export function playlistItemsList(params?: {}) {
-  return request<PlaylistItems>('/playlistItems', params);
+  return request<PlaylistItemList>('/playlistItems', params);
 }
 
 export function searchList(params?: {}) {
-  return request<SearchResultItems>('/search', params);
+  return request<SearchList>('/search', params);
 }
