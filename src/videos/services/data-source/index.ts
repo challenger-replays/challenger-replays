@@ -1,5 +1,4 @@
 import { redisClientInstance as cacheController } from '../../../services/redis';
-import { Feed } from '../../adapters';
 import { Snippet } from '../../types';
 import { channelIds, playlistsLatestItemsList, search, uploadsPlaylistsIdList } from '../youtube';
 
@@ -11,7 +10,10 @@ const SEARCH_RESULTS_EXPIRE_TIME = parseInt(`${process.env.CACHE_SEARCH_RESULTS_
 
 export class DataSource {
   private cacheQueue: {
-    [key: string]: any[],
+    [key: string]: Array<{
+      resolve: (value: Snippet[] | PromiseLike<Snippet[]>) => void,
+      reject: (reason: any) => void,
+    }>;
   };
 
   constructor() {
@@ -20,9 +22,9 @@ export class DataSource {
     };
   }
 
-  public async getFeed(): Promise<Feed> {
+  public async getFeed(): Promise<Snippet[]> {
     try {
-      const cache = await cacheController.get<Feed>(KEY_FEED);
+      const cache = await cacheController.get<Snippet[]>(KEY_FEED); // replace with list
       if (cache) {
         return cache;
       }
@@ -31,7 +33,7 @@ export class DataSource {
     }
 
     const queue = this.cacheQueue.feed;
-    const promise = new Promise<Feed>((resolve, reject) => queue.push({resolve, reject}));
+    const promise = new Promise<Snippet[]>((resolve, reject) => queue.push({resolve, reject}));
 
     if (1 === queue.length) {
       try {

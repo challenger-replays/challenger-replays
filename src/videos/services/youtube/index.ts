@@ -1,11 +1,11 @@
-import { Feed, mapSearchListsToSnippet } from '../../adapters';
+import { mapPlaylistItemListsToSnippets, mapSearchListsToSnippet } from '../../adapters';
 import { Snippet } from '../../types';
 import * as constants from './constants';
 import * as core from './core';
 
-export async function playlistsLatestItemsList(playlistIds: string[] = []) {
+export async function playlistsLatestItemsList(playlistIds: string[] = []): Promise<Snippet[]> {
   if (0 === playlistIds.length) {
-    return new Feed();
+    return [];
   }
 
   try {
@@ -15,7 +15,7 @@ export async function playlistsLatestItemsList(playlistIds: string[] = []) {
     }));
     const playlistsItemsList = (await Promise.all(promises))
       .map(response => response.data);
-    return Feed.parse(playlistsItemsList);
+    return mapPlaylistItemListsToSnippets(playlistsItemsList);
   } catch (e) {
     throw e;
   }

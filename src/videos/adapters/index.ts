@@ -1,19 +1,8 @@
 import { compareYoutubeDates } from '../../utils/dates';
-import { BaseSnippet, SearchList, SearchListItem, Snippet, Thumbnail } from '../types';
-export * from './Feed';
+import { SearchList, SearchListItem, Snippet} from '../types';
+import { mapItemThumbnails } from './mapPlaylistItemListsToSnippets';
 
-function mapItemThumbnails(snippet: BaseSnippet): Thumbnail {
-  const { thumbnails } = snippet;
-  return Object.keys(thumbnails)
-    .map(key => {
-      const { width } = thumbnails[key];
-      return { [width]: thumbnails[key].url};
-    })
-    .reduce((accum, value) => ({
-      ...accum,
-      ...value,
-    }), {});
-}
+export * from './mapPlaylistItemListsToSnippets';
 
 export function mapSearchListsToSnippet(lists: SearchList[]): Snippet[] {
   const items = lists.reduce((accum, searchResult) => accum.concat(searchResult.items), new Array<SearchListItem>());
