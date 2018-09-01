@@ -1,6 +1,6 @@
 import { redisClientInstance as cacheController } from '../../../services/redis';
 import { Feed } from '../../adapters';
-import { SearchListItem } from '../../types';
+import { Snippet } from '../../types';
 import { channelIds, playlistsLatestItemsList, search, uploadsPlaylistsIdList } from '../youtube';
 
 const KEY_FEED = 'challenger-replays/videos/feed';
@@ -55,12 +55,12 @@ export class DataSource {
     return promise;
   }
 
-  public async getSearchResult(query: string, offset = 0, resultsPerPage = 10): Promise<SearchListItem[]> {
+  public async getSearchResult(query: string, offset = 0, resultsPerPage = 10): Promise<Snippet[]> {
     const key = `${KEY_SEARCH}:${query}`;
     const end = offset + resultsPerPage;
 
     try {
-      const cache = await cacheController.lrange<SearchListItem>(key, offset, end);
+      const cache = await cacheController.lrange<Snippet>(key, offset, end);
       if (cache && 0 < cache.length) {
         return cache;
       }
@@ -69,11 +69,11 @@ export class DataSource {
     }
 
     const queue = this.cacheQueue[key] || [];
-    const promise = new Promise<SearchListItem[]>((resolve, reject) => queue.push({resolve, reject}));
+    const promise = new Promise<Snippet[]>((resolve, reject) => queue.push({resolve, reject}));
 
     if (1 === queue.length) {
       try {
-        const searchResult = await search(channelIds, query);
+        const searchResult: Snippet[] = await search(channelIds, query);
 
         try {
           await cacheController.rpush(key, searchResult);
