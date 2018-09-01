@@ -12,6 +12,7 @@ const CHANNEL_IDS = [
 export { CHANNEL_IDS as channelIds };
 
 export const playlistItemsListDefaultParams = {
+  maxResults: 5,
   part: 'snippet',
   fields: 'items/snippet',
 };
