@@ -9,7 +9,7 @@ export function parseYoutubeDate(unit: Dated) {
   return new Date(unit.publishedAt);
 }
 
-export function compareYoutubeDates(order = 'asc') {
+export function compareYoutubeDates(order: 'asc' | 'desc' = 'asc') {
   if (!['asc', 'desc'].includes(order)) {
     throw new TypeError(`Invalid 'order' argument: ${order}`);
   }
