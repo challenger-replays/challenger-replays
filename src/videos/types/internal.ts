@@ -11,3 +11,8 @@ export interface Snippet extends Dated {
   thumbnails: Thumbnail;
   videoId: string;
 }
+
+export interface Response {
+  offset?: number;
+  snippets: Snippet[];
+}

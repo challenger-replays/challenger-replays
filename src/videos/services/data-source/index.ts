@@ -1,5 +1,5 @@
 import { redisClientInstance as cacheController } from '../../../services/redis';
-import { Snippet } from '../../types';
+import { Response, Snippet } from '../../types';
 import {
   channelIds,
   playlistsLatestItemsList,
@@ -23,42 +23,47 @@ export class DataSource {
     }>;
   } = {};
 
-  public async getFeed(): Promise<Snippet[]> {
-    const cache = await this.getCachedSnippets(KEY_FEED);
-    if (cache) {
-      return cache;
+  public async getFeed(): Promise<Response> {
+    let snippets = await this.getCachedSnippets(KEY_FEED);
+    if (!snippets) {
+      snippets = await this.loadData({
+        expire: FEED_EXPIRE_TIME,
+        executor: async () => {
+          const ids = await uploadsPlaylistsIdList(channelIds);
+          return playlistsLatestItemsList(ids);
+        },
+        key: KEY_FEED,
+      });
     }
 
-    return this.loadData({
-      expire: FEED_EXPIRE_TIME,
-      executor: async () => {
-        const ids = await uploadsPlaylistsIdList(channelIds);
-        return playlistsLatestItemsList(ids);
-      },
-      key: KEY_FEED,
-    });
+    return {
+      snippets,
+    };
   }
 
   public async getSearchResult(
     query: string,
     offset = 0,
     resultsPerPage = 10,
-  ): Promise<Snippet[]> {
+  ): Promise<Response> {
     const key = `${KEY_SEARCH}:${query}`;
     const end = offset + resultsPerPage;
 
-    const cache = await this.getCachedSnippets(key, offset, end);
-    if (cache) {
-      return cache;
+    let snippets = await this.getCachedSnippets(key, offset, end);
+    if (!snippets) {
+      snippets = await this.loadData({
+        expire: SEARCH_RESULTS_EXPIRE_TIME,
+        executor: () => {
+          return search(channelIds, query);
+        },
+        key,
+      });
     }
 
-    return this.loadData({
-      expire: SEARCH_RESULTS_EXPIRE_TIME,
-      executor: () => {
-        return search(channelIds, query);
-      },
-      key,
-    });
+    return {
+      offset,
+      snippets,
+    };
   }
 
   private async getCachedSnippets(
@@ -72,7 +77,7 @@ export class DataSource {
         return cache;
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
 
     return undefined;
