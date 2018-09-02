@@ -9,8 +9,8 @@ async function feed(ctx: IRouterContext) {
 }
 
 async function search(ctx: IRouterContext) {
-  const { q: query } = ctx.query;
-  const searchResult = await dataSource.getSearchResult(query);
+  const { q: query, offset } = ctx.query;
+  const searchResult = await dataSource.getSearchResult(query, offset);
   ctx.body = JSON.stringify(searchResult, null, 2);
   ctx.set({
     Connection: 'keep-alive',
