@@ -21,7 +21,7 @@ const videos = new Router()
   .use(async (ctx, next) => {
     await next();
     ctx.set({
-      'Connection': 'close',
+      Connection: 'close',
       ...ctx.response.header,
       'Content-Language': 'en-US',
       'Content-Type': 'application/json; charset=utf-8',
