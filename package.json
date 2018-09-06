@@ -14,9 +14,15 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,json,ts}": [
-      "prettier --write",
-      "git add"
+    "linters": {
+      "packages/**/*.{js,jsx,json,ts,tsx}": [
+        "prettier --write",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/node_modules/**/*",
+      "**/dist/**/*"
     ]
   },
   "devDependencies": {
