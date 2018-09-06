@@ -1,15 +1,13 @@
 {
-  "name": "server",
+  "name": "challenger-replays",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "lint": "tslint -c tslint.json -p tsconfig.json",
-    "start": "opn http://localhost:4000/ && nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Maxim Belsky",
+  "repository": "git@github.com:challenger-replays/server.git",
+  "author": "Maxim Belsky <public.belsky@gmail.com>",
   "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "server"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -22,30 +20,11 @@
     ]
   },
   "devDependencies": {
-    "@types/dotenv": "^4.0.3",
-    "@types/koa": "^2.0.46",
-    "@types/koa-compress": "^2.0.8",
-    "@types/koa-router": "^7.0.31",
-    "@types/node": "^10.5.8",
-    "@types/redis": "^2.8.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
     "husky": "^1.0.0-rc.13",
     "lint-staged": "^7.2.2",
-    "nodemon": "^1.18.3",
-    "opn-cli": "^3.1.0",
-    "prettier": "^1.14.2",
-    "ts-node": "^7.0.1",
-    "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.0.1"
-  },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "dotenv": "^6.0.0",
-    "koa": "^2.5.2",
-    "koa-compress": "^3.0.0",
-    "koa-router": "^7.4.0",
-    "redis": "^2.8.0"
+    "prettier": "^1.14.2"
   }
 }
