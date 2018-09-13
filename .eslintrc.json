@@ -1,16 +1,62 @@
 {
-    "env": {
-        "node": true
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "script",
-        "ecmaFeatures": {
-        }
-    },
-    "extends": "airbnb-base",
-    "rules": {
-        "no-unused-vars": "warn",
-        "yoda": "off"
+  "root": true,
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "script",
+    "ecmaFeatures": {}
+  },
+  "plugins": ["import", "react"],
+  "extends": "airbnb-base",
+  "rules": {
+    "no-unused-vars": "warn",
+    "yoda": "off",
+    "react/jsx-key": "error",
+    "react/jsx-no-comment-textnodes": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-target-blank": "error",
+    "react/jsx-no-undef": "error",
+    "react/jsx-sort-props": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": "parens-new-line",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+        "arrow": "parens-new-line",
+        "condition": "parens-new-line",
+        "logical": "parens-new-line",
+        "prop": "ignore"
+      }
+    ],
+    "react/no-children-prop": "error",
+    "react/no-deprecated": "error",
+    "react/no-direct-mutation-state": "error",
+    "react/no-find-dom-node": "error",
+    "react/no-is-mounted": "error",
+    "react/no-string-refs": "error",
+    "react/no-unescaped-entities": "error",
+    "react/no-unknown-property": "error",
+    "react/prop-types": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/require-render-return": "error",
+    "react/self-closing-comp": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.jsx"],
+      "rules": {
+        "class-methods-use-this": "off"
+      }
     }
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  }
 }

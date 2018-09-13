@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/prefer-default-export": false
+  }
+}

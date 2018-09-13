@@ -8,6 +8,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "lint": "yarn lint:eslint",
+    "lint:eslint": "eslint --ext .js --ext .jsx packages"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -26,11 +30,24 @@
     ]
   },
   "devDependencies": {
+    "@types/dotenv": "^4.0.3",
+    "@types/koa": "^2.0.46",
+    "@types/koa-compress": "^2.0.8",
+    "@types/koa-router": "^7.0.31",
+    "@types/node": "^10.5.8",
+    "@types/redis": "^2.8.6",
+    "babel-eslint": "^9.0.0",
     "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-react": "^7.11.1",
     "husky": "^1.0.0-rc.13",
     "lint-staged": "^7.2.2",
-    "prettier": "^1.14.2"
+    "nodemon": "^1.18.3",
+    "opn-cli": "^3.1.0",
+    "prettier": "^1.14.2",
+    "ts-node": "^7.0.1",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.0.1"
   }
 }
