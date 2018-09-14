@@ -4,11 +4,13 @@ import Home from './Home';
 
 const theme = {
   primary: '#ffb300',
+  darkPrimary: '#dfa00c',
   accent: '#75bdb1', // #5ECCC4 #00bcd4
   text: '#212121',
   textAccent: '#fff',
   textSecondary: '#757575',
   divider: '#bdbdbd',
+  borderRadius: '3px',
 };
 
 class App extends React.Component {

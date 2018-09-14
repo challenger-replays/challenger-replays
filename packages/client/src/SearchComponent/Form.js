@@ -7,7 +7,7 @@ const Form = styled.form`
   height: 44px;
   padding-left: 12px;
   border-color: rgba(0, 0, 0, 0.15);
-  border-radius: 3px;
+  border-radius: ${p => p.theme.borderRadius};
   border-style: solid;
   border-width: 1px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
