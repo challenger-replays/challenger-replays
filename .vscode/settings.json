@@ -1,0 +1,14 @@
+{
+  "javascript.format.enable": true,
+  "javascript.validate.enable": false,
+  "prettier.eslintIntegration": true,
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": false, // prettier-eslint does that
+  "eslint.packageManager": "yarn",
+  "eslint.run": "onType",
+  "tslint.enable": true,
+  "tslint.jsEnable": true,
+  "tslint.autoFixOnSave": false,
+  "tslint.run": "onType",
+  "tslint.packageManager": "yarn"
+}

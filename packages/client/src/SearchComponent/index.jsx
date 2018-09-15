@@ -16,7 +16,7 @@ class SearchComponent extends React.Component {
     },
   };
 
-  onInputChange = e => {
+  onInputChange = (e) => {
     this.setState({
       searchQuery: e.target.value,
     });
@@ -33,7 +33,7 @@ class SearchComponent extends React.Component {
     );
   };
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     const { searchQuery } = this.state;
     if (0 === searchQuery.length) {
