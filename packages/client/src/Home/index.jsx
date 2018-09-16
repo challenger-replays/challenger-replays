@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchComponent from '../SearchComponent';
 import { H1 } from '../components';
+import LatestVideos from '../LatestVideos';
 import Wrapper from './Wrapper';
 import SearchBlock from './SearchBlock';
 import Logo from './Logo';
@@ -17,6 +18,7 @@ class Home extends React.Component {
           </MeetingBlock>
           <SearchComponent />
         </SearchBlock>
+        <LatestVideos />
       </Wrapper>
     );
   }

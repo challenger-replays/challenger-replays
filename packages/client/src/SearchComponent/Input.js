@@ -8,6 +8,7 @@ const Input = styled(CommonInput).attrs({
   flex-grow: 1;
   flex-shrink: 0;
   border: none;
+  background: inherit;
 `;
 
 export default Input;

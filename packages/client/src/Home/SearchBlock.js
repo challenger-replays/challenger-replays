@@ -9,15 +9,18 @@ const SearchBlock = styled.section`
   align-items: center;
   width: 100%;
   height: auto;
-  position: absolute;
-  top: 0;
+  margin-top: 18vh;
+
+  @media (min-width: 1024px) {
+    width: auto;
+    padding-right: 10vw;
+  }
 
   @media (min-height: 480px) {
-    top: 18%;
   }
 
   @media (min-height: 600px) {
-    top: 24%;
+    margin-top: 26vh;
   }
 `;
 
