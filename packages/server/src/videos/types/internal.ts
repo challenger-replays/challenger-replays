@@ -7,9 +7,11 @@ export interface Thumbnail {
 export interface Snippet extends Dated {
   channelId: string;
   channelTitle: string;
+  channelUrl: string;
   title: string;
   thumbnails: Thumbnail;
   videoId: string;
+  videoUrl: string;
 }
 
 export interface Response {

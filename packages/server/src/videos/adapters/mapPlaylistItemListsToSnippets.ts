@@ -1,11 +1,10 @@
 import * as dates from '../../utils/dates';
+import { PlaylistItemList, PlaylistItemListItem, Snippet } from '../types';
 import {
-  BaseSnippet,
-  PlaylistItemList,
-  PlaylistItemListItem,
-  Snippet,
-  Thumbnail,
-} from '../types';
+  makeYoutubeChannelUrl,
+  makeYoutubeVideoUrl,
+  mapItemThumbnails,
+} from './utils';
 
 function isFresh(item: dates.Dated) {
   const publishedAt = dates.parseYoutubeDate(item);
@@ -21,27 +20,13 @@ function mapItemToSnippet(item: PlaylistItemListItem): Snippet {
   return {
     channelId,
     channelTitle,
+    channelUrl: makeYoutubeChannelUrl(channelId),
     publishedAt,
     title,
     thumbnails: mapItemThumbnails(snippet),
     videoId,
+    videoUrl: makeYoutubeVideoUrl(videoId),
   };
-}
-
-export function mapItemThumbnails(snippet: BaseSnippet): Thumbnail {
-  const { thumbnails } = snippet;
-  return Object.keys(thumbnails)
-    .map(key => {
-      const { width, url } = thumbnails[key];
-      return { [width]: url };
-    })
-    .reduce(
-      (accum, value) => ({
-        ...accum,
-        ...value,
-      }),
-      {},
-    );
 }
 
 export function mapPlaylistItemListsToSnippets(
