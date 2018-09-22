@@ -11,19 +11,17 @@ export const AVideo = styled(A)`
 
 export const H2 = styled(Header2)``;
 
-export const Videos = styled.div`
-  dispay: flex;
+export const Img = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
 `;
 
-export const Wrapper = styled.section`
-  display: none;
-  background-color: ${p => p.theme.primary};
-
-  @media (min-width: 1024px) {
-    display: block;
-    width: 36%;
-    height: 100vh;
-    padding-right: 32px;
-    padding-left: 32px;
-  }
+export const Videos = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
 `;

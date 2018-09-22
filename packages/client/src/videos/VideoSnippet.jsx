@@ -1,18 +1,31 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 import Url from './Url';
-import { AChannel, AVideo } from './styled';
+import { AChannel, AVideo, Img } from './styled';
 
-class VideoSnippet extends React.Component {
+const Wrapper = styled.div`
+  width: 210px;
+  margin-right: 4px;
+  margin-bottom: 24px;
+`;
+
+class VideoSnippet extends React.PureComponent {
   render() {
     const {
-      channelTitle, channelUrl, title, videoUrl,
+      channelTitle,
+      channelUrl,
+      title,
+      thumbnails,
+      videoUrl,
     } = this.props.details;
+    const lowestThumbnailKey = Object.keys(thumbnails)[0];
     return (
-      <div>
+      <Wrapper>
+        <Img src={thumbnails[lowestThumbnailKey]} alt={title} />
         <Url href={videoUrl} title={title} StyledA={AVideo} />
         <Url href={channelUrl} title={channelTitle} StyledA={AChannel} />
-      </div>
+      </Wrapper>
     );
   }
 }

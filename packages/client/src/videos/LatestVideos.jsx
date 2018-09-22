@@ -1,6 +1,20 @@
 import React from 'react';
-import { H2, Videos, Wrapper } from './styled';
+import styled from 'styled-components';
+import { H2, Videos } from './styled';
 import VideoSnippet from './VideoSnippet';
+
+const Wrapper = styled.section`
+  display: none;
+  background-color: ${p => p.theme.primary};
+
+  @media (min-width: 1024px) {
+    display: block;
+    width: 36%;
+    height: 100vh;
+    padding-right: 0px;
+    padding-left: 48px;
+  }
+`;
 
 class LatestVideos extends React.Component {
   state = {
