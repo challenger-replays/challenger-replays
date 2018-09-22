@@ -1,12 +1,25 @@
 import styled from 'styled-components';
-import { A, H2 as Header2 } from '../../components';
+import { A as Anchor, H2 as Header2 } from '../../components';
+
+const A = styled(Anchor)`
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.15rem;
+  max-height: 1.15rem;
+`;
 
 export const AChannel = styled(A)`
-  display: block;
+  color: #474747;
+  font-size: 13px;
 `;
 
 export const AVideo = styled(A)`
-  display: block;
+  white-space: normal;
+  max-height: 2.3rem;
+  font-size: 14px;
+  font-weight: 500;
 `;
 
 export const H2 = styled(Header2)``;

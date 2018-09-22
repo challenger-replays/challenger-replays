@@ -22,7 +22,9 @@ class VideoSnippet extends React.PureComponent {
     const lowestThumbnailKey = Object.keys(thumbnails)[0];
     return (
       <Wrapper>
-        <Img src={thumbnails[lowestThumbnailKey]} alt={title} />
+        <Url href={videoUrl} title={title}>
+          <Img src={thumbnails[lowestThumbnailKey]} alt={title} />
+        </Url>
         <Url href={videoUrl} title={title} StyledA={AVideo} />
         <Url href={channelUrl} title={channelTitle} StyledA={AChannel} />
       </Wrapper>

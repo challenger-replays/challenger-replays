@@ -6,6 +6,8 @@ import VideoSnippet from './VideoSnippet';
 const Wrapper = styled.section`
   display: none;
   background-color: ${p => p.theme.primary};
+  overflow-x: none;
+  overflow-y: auto;
 
   @media (min-width: 1024px) {
     display: block;
