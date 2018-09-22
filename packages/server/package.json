@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "lint": "tslint -c ../../tslint.json -p tsconfig.json",
     "start": "opn http://localhost:4000/ && nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
