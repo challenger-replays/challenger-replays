@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Home from './Home';
+import Search from './Search';
 
 const theme = {
   primary: '#ffb300',
@@ -19,7 +20,10 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <Route exact path="/" component={Home} />
+          <Switch>
+            <Route path="/search" component={Search} />
+            <Route exact path="/" component={Home} />
+          </Switch>
         </ThemeProvider>
       </BrowserRouter>
     );
