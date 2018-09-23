@@ -3,7 +3,7 @@
   "javascript.validate.enable": false,
   "prettier.eslintIntegration": true,
   "eslint.enable": true,
-  "eslint.autoFixOnSave": false, // prettier-eslint does that
+  "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
   "eslint.run": "onType",
   "tslint.enable": true,
