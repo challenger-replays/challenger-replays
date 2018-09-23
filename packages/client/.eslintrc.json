@@ -7,6 +7,6 @@
     "sourceType": "module"
   },
   "rules": {
-    "import/prefer-default-export": false
+    "import/prefer-default-export": "off"
   }
 }
