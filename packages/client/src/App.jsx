@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Home from './Home';
 
@@ -16,9 +17,11 @@ const theme = {
 class App extends React.Component {
   render() {
     return (
-      <ThemeProvider theme={theme}>
-        <Home />
-      </ThemeProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <Route exact path="/" component={Home} />
+        </ThemeProvider>
+      </BrowserRouter>
     );
   }
 }
