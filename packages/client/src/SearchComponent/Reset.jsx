@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { svgs } from '../components';
+import { Cancel } from '../svgs';
 import Btn from './Button';
 
 const Button = styled(Btn)`
@@ -20,7 +20,7 @@ class Reset extends React.Component {
     const { onClick } = this.props;
     return (
       <Button type="button" onClick={onClick}>
-        <svgs.Cancel width="28" height="28" />
+        <Cancel width="28" height="28" />
       </Button>
     );
   }

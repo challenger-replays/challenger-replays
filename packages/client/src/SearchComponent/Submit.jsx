@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { svgs } from '../components';
+import { Search } from '../svgs';
 import Btn from './Button';
 
 const Button = styled(Btn)`
@@ -27,7 +27,7 @@ const Button = styled(Btn)`
 function Submit({ primary }) {
   return (
     <Button primary={primary}>
-      <svgs.Search width="32" height="32" />
+      <Search width="32" height="32" />
     </Button>
   );
 }
