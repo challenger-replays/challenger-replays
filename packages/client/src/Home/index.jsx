@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import SearchComponent from '../SearchComponent';
 import { H1 } from '../components';
@@ -8,6 +9,10 @@ import Logo from './Logo';
 import MeetingBlock from './MeetingBlock';
 
 class Home extends React.Component {
+  onSearch = (query) => {
+    this.props.history.push(`/search?q=${query}`);
+  };
+
   render() {
     return (
       <Wrapper>
@@ -16,12 +21,16 @@ class Home extends React.Component {
             <Logo />
             <H1 primary>Challenger Replays</H1>
           </MeetingBlock>
-          <SearchComponent />
+          <SearchComponent onSearch={this.onSearch} />
         </SearchBlock>
         <LatestVideos />
       </Wrapper>
     );
   }
 }
+
+Home.propTypes = {
+  history: PropTypes.object,
+};
 
 export default Home;

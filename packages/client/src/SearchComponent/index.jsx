@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Form from './Form';
 import Input from './Input';
@@ -38,6 +39,11 @@ class SearchComponent extends React.Component {
     const { searchQuery } = this.state;
     if (0 === searchQuery.length) {
       this.searchInput.focus();
+    } else {
+      const { onSearch } = this.props;
+      if (onSearch) {
+        onSearch(searchQuery);
+      }
     }
   };
 
@@ -61,5 +67,9 @@ class SearchComponent extends React.Component {
     );
   }
 }
+
+SearchComponent.propTypes = {
+  onSearch: PropTypes.func,
+};
 
 export default SearchComponent;
