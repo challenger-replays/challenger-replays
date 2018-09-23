@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Input as CommonInput } from '../components';
+import { Input as CommonInput } from '../styled';
 
 const Input = styled(CommonInput).attrs({
   placeholder: 'Find champions, players and more...',

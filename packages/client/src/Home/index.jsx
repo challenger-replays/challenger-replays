@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import SearchComponent from '../SearchComponent';
-import { H1 } from '../components';
+import { H1 } from '../styled';
 import LatestVideos from '../videos/LatestVideos';
 import Wrapper from './Wrapper';
 import SearchBlock from './SearchBlock';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { A as Anchor, H2 as Header2 } from '../../components';
+import { A as Anchor, H2 as Header2 } from '../../styled';
 
 const A = styled(Anchor)`
   display: block;
