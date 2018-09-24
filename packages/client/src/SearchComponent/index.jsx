@@ -6,9 +6,12 @@ import Reset from './Reset';
 import Submit from './Submit';
 
 class SearchComponent extends React.Component {
-  state = {
-    searchQuery: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchQuery: props.initial.query,
+    };
+  }
 
   searchInput = {
     ref: React.createRef(),
@@ -48,7 +51,9 @@ class SearchComponent extends React.Component {
   };
 
   componentDidMount() {
-    this.searchInput.focus();
+    if (this.props.initial.isFocused) {
+      this.searchInput.focus();
+    }
   }
 
   render() {
@@ -69,7 +74,18 @@ class SearchComponent extends React.Component {
 }
 
 SearchComponent.propTypes = {
+  initial: PropTypes.shape({
+    isFocused: PropTypes.bool,
+    query: PropTypes.string,
+  }),
   onSearch: PropTypes.func,
+};
+
+SearchComponent.defaultProps = {
+  initial: {
+    isFocused: false,
+    query: '',
+  },
 };
 
 export default SearchComponent;
