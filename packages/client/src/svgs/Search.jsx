@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function Search({ width = '100%', height = '100%' }) {
+export default function Search({ width, height }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,3 +12,13 @@ export default function Search({ width = '100%', height = '100%' }) {
     </svg>
   );
 }
+
+Search.propTypes = {
+  height: PropTypes.string,
+  width: PropTypes.string,
+};
+
+Search.defaultProps = {
+  height: '100%',
+  width: '100%',
+};
