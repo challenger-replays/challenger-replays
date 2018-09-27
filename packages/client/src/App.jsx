@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Home from './Home';
 import Search from './Search';
@@ -17,17 +17,16 @@ const theme = {
 
 class App extends React.Component {
   render() {
+    const { search } = this.props.location;
     return (
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <Switch>
-            <Route path="/search" component={Search} />
-            <Route exact path="/" component={Home} />
-          </Switch>
-        </ThemeProvider>
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <Route path="/search" component={Search} key={search} />
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </ThemeProvider>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
