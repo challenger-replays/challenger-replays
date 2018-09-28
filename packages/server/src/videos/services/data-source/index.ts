@@ -58,9 +58,9 @@ export class DataSource {
     }
 
     const key = normalizeKey(`${KEY_SEARCH}:${query}`);
-    const end = offset + limit - 1;
+    const end = offset + limit;
 
-    let snippets = await this.getCachedSnippets(key, offset, end);
+    let snippets = await this.getCachedSnippets(key, offset, end - 1);
     if (!snippets) {
       snippets = await this.loadData({
         expire: SEARCH_RESULTS_EXPIRE_TIME,
@@ -68,6 +68,8 @@ export class DataSource {
           return search(channelIds, query);
         },
         key,
+        start: offset,
+        stop: end,
       });
     }
 
@@ -104,7 +106,11 @@ export class DataSource {
     const { expire, executor } = options;
     const key = options.key.toLowerCase().trim();
     const start = options.start || 0;
-    const stop = options.stop || -1;
+
+    let stop: number | undefined = options.stop || 0;
+    if (!Number.isInteger(stop) || stop < 1) {
+      stop = undefined;
+    }
 
     const { cacheQueues } = this;
     if (!cacheQueues.hasOwnProperty(key)) {
