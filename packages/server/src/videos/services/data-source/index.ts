@@ -15,6 +15,8 @@ const FEED_EXPIRE_TIME =
 const SEARCH_RESULTS_EXPIRE_TIME =
   parseInt(`${process.env.CACHE_SEARCH_RESULTS_EXPIRE_TIME}`, 10) || 1 * 60;
 
+const normalizeKey = (key: string) => (key || '').toLowerCase().trim();
+
 export class DataSource {
   private cacheQueues: {
     [key: string]: Array<{
@@ -24,7 +26,8 @@ export class DataSource {
   } = {};
 
   public async getFeed(): Promise<Response> {
-    let snippets = await this.getCachedSnippets(KEY_FEED);
+    const key = normalizeKey(KEY_FEED);
+    let snippets = await this.getCachedSnippets(key);
     if (!snippets) {
       snippets = await this.loadData({
         expire: FEED_EXPIRE_TIME,
@@ -32,7 +35,7 @@ export class DataSource {
           const ids = await uploadsPlaylistsIdList(channelIds);
           return playlistsLatestItemsList(ids);
         },
-        key: KEY_FEED,
+        key,
       });
     }
 
@@ -43,11 +46,19 @@ export class DataSource {
 
   public async getSearchResult(
     query: string,
-    offset = 0,
-    resultsPerPage = 10,
+    offset: number,
+    limit: number,
   ): Promise<Response> {
-    const key = `${KEY_SEARCH}:${query}`;
-    const end = offset + resultsPerPage;
+    if (!Number.isInteger(offset)) {
+      offset = 0;
+    }
+
+    if (!Number.isInteger(limit)) {
+      limit = 10;
+    }
+
+    const key = normalizeKey(`${KEY_SEARCH}:${query}`);
+    const end = offset + limit - 1;
 
     let snippets = await this.getCachedSnippets(key, offset, end);
     if (!snippets) {
