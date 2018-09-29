@@ -1,6 +1,7 @@
 import React from 'react';
 import UrlSearchParams from 'url-search-params';
 import SearchComponent from '../SearchComponent';
+import SearchVideos from '../videos/SearchVideos';
 import HeaderBlock from './HeaderBlock';
 import Logo from './Logo';
 
@@ -39,13 +40,7 @@ class Search extends React.Component {
           <Logo />
           <SearchComponent initial={{ query }} onSearch={this.onSearch} />
         </HeaderBlock>
-        {Boolean(snippets) && (
-          <ul>
-            {snippets.map(snippet => (
-              <li key={snippet.videoId}>{snippet.title}</li>
-            ))}
-          </ul>
-        )}
+        <SearchVideos snippets={snippets} />
       </div>
     );
   }
