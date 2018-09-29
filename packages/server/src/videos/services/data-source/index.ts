@@ -20,16 +20,16 @@ const normalizeKey = (key: string) => (key || '').toLowerCase().trim();
 export class DataSource {
   private cacheQueues: {
     [key: string]: Array<{
-      resolve: (value: Snippet[] | PromiseLike<Snippet[]>) => void;
+      resolve: (value: Response | PromiseLike<Response>) => void;
       reject: (reason: any) => void;
     }>;
   } = {};
 
   public async getFeed(): Promise<Response> {
     const key = normalizeKey(KEY_FEED);
-    let snippets = await this.getCachedSnippets(key);
-    if (!snippets) {
-      snippets = await this.loadData({
+    let response = await this.getCachedSnippets(key);
+    if (!response) {
+      response = await this.loadData({
         expire: FEED_EXPIRE_TIME,
         executor: async () => {
           const ids = await uploadsPlaylistsIdList(channelIds);
@@ -40,7 +40,7 @@ export class DataSource {
     }
 
     return {
-      snippets,
+      ...response,
     };
   }
 
@@ -60,9 +60,9 @@ export class DataSource {
     const key = normalizeKey(`${KEY_SEARCH}:${query}`);
     const end = offset + limit;
 
-    let snippets = await this.getCachedSnippets(key, offset, end - 1);
-    if (!snippets) {
-      snippets = await this.loadData({
+    let response = await this.getCachedSnippets(key, offset, end - 1);
+    if (!response) {
+      response = await this.loadData({
         expire: SEARCH_RESULTS_EXPIRE_TIME,
         executor: () => {
           return search(channelIds, query);
@@ -74,8 +74,9 @@ export class DataSource {
     }
 
     return {
+      ...response,
+      limit,
       offset,
-      snippets,
     };
   }
 
@@ -83,11 +84,15 @@ export class DataSource {
     key: string,
     start: number = 0,
     stop: number = -1,
-  ): Promise<Snippet[] | undefined> {
+  ): Promise<Response | undefined> {
     try {
       const cache = await cacheController.lrange<Snippet>(key, start, stop);
+      const total = await cacheController.llen(key);
       if (cache && 0 < cache.length) {
-        return cache;
+        return {
+          snippets: cache,
+          total,
+        };
       }
     } catch (e) {
       console.error(e);
@@ -102,7 +107,7 @@ export class DataSource {
     key: string;
     start?: number;
     stop?: number;
-  }): Promise<Snippet[]> {
+  }): Promise<Response> {
     const { expire, executor } = options;
     const key = options.key.toLowerCase().trim();
     const start = options.start || 0;
@@ -118,7 +123,7 @@ export class DataSource {
     }
 
     const queue = cacheQueues[key];
-    const promise = new Promise<Snippet[]>((resolve, reject) => {
+    const promise = new Promise<Response>((resolve, reject) => {
       queue.push({ resolve, reject });
     });
 
@@ -133,8 +138,10 @@ export class DataSource {
           console.error(e);
         }
 
-        const result = data.slice(start, stop);
-        queue.forEach(({ resolve }) => resolve(result));
+        const snippets = data.slice(start, stop);
+        queue.forEach(({ resolve }) =>
+          resolve({ snippets, total: data.length }),
+        );
       } catch (e) {
         queue.forEach(({ reject }) => reject(e));
       } finally {

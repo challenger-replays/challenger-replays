@@ -15,6 +15,8 @@ export interface Snippet extends Dated {
 }
 
 export interface Response {
-  offset?: number;
   snippets: Snippet[];
+  limit?: number;
+  offset?: number;
+  total?: number;
 }
