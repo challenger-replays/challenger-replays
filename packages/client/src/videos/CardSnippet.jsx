@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
+import * as PropTypesRepo from '../types';
 import Url from './Url';
 import { AChannel, AVideo, Img } from './styled';
 
@@ -33,16 +33,7 @@ class CardSnippet extends React.PureComponent {
 }
 
 CardSnippet.propTypes = {
-  details: PropTypes.shape({
-    channelId: PropTypes.string.isRequired,
-    channelTitle: PropTypes.string.isRequired,
-    channelUrl: PropTypes.string.isRequired,
-    publishedAt: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    thumbnails: PropTypes.object.isRequired,
-    videoId: PropTypes.string.isRequired,
-    videoUrl: PropTypes.string.isRequired,
-  }).isRequired,
+  details: PropTypesRepo.snippet.isRequired,
 };
 
 export default CardSnippet;
