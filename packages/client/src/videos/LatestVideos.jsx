@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { H2, Videos } from './styled';
-import VideoSnippet from './VideoSnippet';
+import CardSnippet from './CardSnippet';
 
 const Wrapper = styled.section`
   display: none;
@@ -38,7 +38,7 @@ class LatestVideos extends React.Component {
         {snippets && (
           <Videos>
             {snippets.map(snippet => (
-              <VideoSnippet key={snippet.videoId} details={{ ...snippet }} />
+              <CardSnippet key={snippet.videoId} details={{ ...snippet }} />
             ))}
           </Videos>
         )}

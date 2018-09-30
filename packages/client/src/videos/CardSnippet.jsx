@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   margin-bottom: 24px;
 `;
 
-class VideoSnippet extends React.PureComponent {
+class CardSnippet extends React.PureComponent {
   render() {
     const {
       channelTitle,
@@ -32,7 +32,7 @@ class VideoSnippet extends React.PureComponent {
   }
 }
 
-VideoSnippet.propTypes = {
+CardSnippet.propTypes = {
   details: PropTypes.shape({
     channelId: PropTypes.string.isRequired,
     channelTitle: PropTypes.string.isRequired,
@@ -45,4 +45,4 @@ VideoSnippet.propTypes = {
   }).isRequired,
 };
 
-export default VideoSnippet;
+export default CardSnippet;
