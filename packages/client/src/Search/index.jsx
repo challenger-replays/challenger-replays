@@ -35,13 +35,13 @@ class Search extends React.Component {
   render() {
     const { query, snippets } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <HeaderBlock>
           <Logo />
           <SearchComponent initial={{ query }} onSearch={this.onSearch} />
         </HeaderBlock>
         <SearchVideos snippets={snippets} />
-      </div>
+      </React.Fragment>
     );
   }
 }
