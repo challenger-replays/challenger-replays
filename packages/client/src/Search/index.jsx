@@ -1,9 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 import UrlSearchParams from 'url-search-params';
 import SearchComponent from '../SearchComponent';
 import SearchVideos from '../videos/SearchVideos';
 import HeaderBlock from './HeaderBlock';
 import Logo from './Logo';
+
+const SearchVideosBox = styled.div`
+  padding-top: 16px;
+  padding-right: 8px;
+  padding-bottom: 16px;
+  padding-left: 8px;
+`;
 
 class Search extends React.Component {
   constructor(props) {
@@ -40,7 +48,9 @@ class Search extends React.Component {
           <Logo />
           <SearchComponent initial={{ query }} onSearch={this.onSearch} />
         </HeaderBlock>
-        <SearchVideos snippets={snippets} />
+        <SearchVideosBox>
+          <SearchVideos snippets={snippets} />
+        </SearchVideosBox>
       </React.Fragment>
     );
   }
