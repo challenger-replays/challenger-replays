@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as PropTypesRepo from '../types';
-import Url from './Url';
-import { AChannel, AVideo, Img } from './styled';
+import * as PropTypesRepo from '../../types';
+import Url from '../Url';
+import { AChannel, AVideo, Img } from '../styled';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   width: 100%;
   max-width: 600px;
 `;
@@ -26,21 +27,21 @@ const DescriptionBox = styled.div`
   margin-left: 8px;
 `;
 
-class RowSnippet extends React.PureComponent {
+class MobileSnippet extends React.PureComponent {
   render() {
     const {
       channelTitle,
       channelUrl,
       title,
-      thumbnails,
+      thumbnail,
       videoUrl,
     } = this.props.details;
-    const lowestThumbnailKey = Object.keys(thumbnails)[0];
+
     return (
       <Wrapper>
         <ThumbnailBox>
           <Url href={videoUrl} title={title}>
-            <Img src={thumbnails[lowestThumbnailKey]} alt={title} />
+            <Img src={thumbnail} alt={title} />
           </Url>
         </ThumbnailBox>
         <DescriptionBox>
@@ -52,8 +53,8 @@ class RowSnippet extends React.PureComponent {
   }
 }
 
-RowSnippet.propTypes = {
-  details: PropTypesRepo.snippet.isRequired,
+MobileSnippet.propTypes = {
+  details: PropTypesRepo.rowSnippet.isRequired,
 };
 
-export default RowSnippet;
+export default MobileSnippet;

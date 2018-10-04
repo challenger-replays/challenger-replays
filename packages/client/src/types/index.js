@@ -10,3 +10,14 @@ export const snippet = PropTypes.shape({
   videoId: string.isRequired,
   videoUrl: string.isRequired,
 });
+
+export const rowSnippet = PropTypes.shape({
+  channelId: string.isRequired,
+  channelTitle: string.isRequired,
+  channelUrl: string.isRequired,
+  publishedAt: string.isRequired,
+  title: string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  videoId: string.isRequired,
+  videoUrl: string.isRequired,
+});
