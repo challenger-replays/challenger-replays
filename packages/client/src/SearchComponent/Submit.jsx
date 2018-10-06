@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Search } from '../svgs';
@@ -31,5 +32,9 @@ function Submit({ primary }) {
     </Button>
   );
 }
+
+Submit.propTypes = {
+  primary: PropTypes.bool,
+};
 
 export default Submit;

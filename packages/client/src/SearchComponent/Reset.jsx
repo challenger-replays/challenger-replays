@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Cancel } from '../svgs';
@@ -25,5 +26,9 @@ class Reset extends React.Component {
     );
   }
 }
+
+Reset.propTypes = {
+  onClick: PropTypes.func,
+};
 
 export default Reset;

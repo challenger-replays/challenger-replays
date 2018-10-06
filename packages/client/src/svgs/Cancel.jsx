@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function Cancel({ width = '100%', height = '100%' }) {
+export default function Cancel({ width, height }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,3 +13,13 @@ export default function Cancel({ width = '100%', height = '100%' }) {
     </svg>
   );
 }
+
+Cancel.propTypes = {
+  width: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+};
+
+Cancel.defaultProps = {
+  width: '100%',
+  height: '100%',
+};
