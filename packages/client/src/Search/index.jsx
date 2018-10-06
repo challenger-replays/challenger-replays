@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import styled from 'styled-components';
 import UrlSearchParams from 'url-search-params';
 import SearchComponent from '../SearchComponent';
@@ -55,5 +56,10 @@ class Search extends React.Component {
     );
   }
 }
+
+Search.propTypes = {
+  history: ReactRouterPropTypes.history,
+  location: ReactRouterPropTypes.location,
+};
 
 export default Search;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import { ThemeProvider } from 'styled-components';
 import Home from './Home';
 import Search from './Search';
@@ -28,5 +29,9 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  location: ReactRouterPropTypes.location,
+};
 
 export default withRouter(App);
