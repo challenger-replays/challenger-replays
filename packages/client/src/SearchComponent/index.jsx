@@ -11,7 +11,7 @@ class SearchComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: props.initial.query,
+      searchQuery: props.initial.query || '',
     };
   }
 

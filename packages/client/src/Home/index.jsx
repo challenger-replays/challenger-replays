@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import SearchComponent from '../SearchComponent';
+import { trackableViewport } from '../hocs';
 import { H1 } from '../styled';
+import * as PropTypesRepo from '../types';
 import LatestVideos from '../videos/LatestVideos';
 import Wrapper from './Wrapper';
 import SearchBlock from './SearchBlock';
@@ -14,6 +16,8 @@ class Home extends React.Component {
   };
 
   render() {
+    // Search is autofocused for iPad Pros
+    const isFocused = !this.props.viewport.isMobile;
     return (
       <Wrapper>
         <SearchBlock>
@@ -21,7 +25,7 @@ class Home extends React.Component {
             <Logo />
             <H1 primary>Challenger Replays</H1>
           </MeetingBlock>
-          <SearchComponent onSearch={this.onSearch} />
+          <SearchComponent initial={{ isFocused }} onSearch={this.onSearch} />
         </SearchBlock>
         <LatestVideos />
       </Wrapper>
@@ -31,6 +35,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
   history: PropTypes.object,
+  viewport: PropTypesRepo.trackableViewport,
 };
 
-export default Home;
+export default trackableViewport(Home);
