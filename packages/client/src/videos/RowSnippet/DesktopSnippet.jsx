@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import * as PropTypesRepo from '../../types';
 import Url from '../Url';
 import { AChannel, AVideo, Img } from '../styled';
+import PublishedAt from '../PublishedAt';
+import { DescriptionBox, SnippetMetaBox, ThumbnailBox } from './styled';
 
 const Wrapper = styled.div`
   display: block;
@@ -23,26 +25,12 @@ const DetailsBox = styled.div`
   width: 100%;
 `;
 
-const ThumbnailBox = styled.div`
-  flex-grow: 0;
-  flex-shrink: 0;
-  width: 120px;
-`;
-
-const DescriptionBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 1;
-  justify-content: space-between;
-  margin-left: 8px;
-`;
-
 class DesktopSnippet extends React.Component {
   render() {
     const {
       channelTitle,
       channelUrl,
+      publishedAt,
       title,
       thumbnail,
       videoUrl,
@@ -57,7 +45,10 @@ class DesktopSnippet extends React.Component {
             </Url>
           </ThumbnailBox>
           <DescriptionBox>
-            <Url href={channelUrl} title={channelTitle} StyledA={AChannel} />
+            <SnippetMetaBox>
+              <Url href={channelUrl} title={channelTitle} StyledA={AChannel} />
+              <PublishedAt at={publishedAt} prefix=" - " />
+            </SnippetMetaBox>
           </DescriptionBox>
         </DetailsBox>
       </Wrapper>

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import * as PropTypesRepo from '../../types';
 import Url from '../Url';
 import { AChannel, AVideo, Img } from '../styled';
+import PublishedAt from '../PublishedAt';
+import { DescriptionBox, SnippetMetaBox, ThumbnailBox } from './styled';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,26 +14,12 @@ const Wrapper = styled.div`
   max-width: 600px;
 `;
 
-const ThumbnailBox = styled.div`
-  flex-grow: 0;
-  flex-shrink: 0;
-  width: 120px;
-`;
-
-const DescriptionBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 1;
-  justify-content: space-between;
-  margin-left: 8px;
-`;
-
 class MobileSnippet extends React.PureComponent {
   render() {
     const {
       channelTitle,
       channelUrl,
+      publishedAt,
       title,
       thumbnail,
       videoUrl,
@@ -46,7 +34,10 @@ class MobileSnippet extends React.PureComponent {
         </ThumbnailBox>
         <DescriptionBox>
           <Url href={videoUrl} title={title} StyledA={AVideo} />
-          <Url href={channelUrl} title={channelTitle} StyledA={AChannel} />
+          <SnippetMetaBox>
+            <Url href={channelUrl} title={channelTitle} StyledA={AChannel} />
+            <PublishedAt at={publishedAt} prefix=" - " />
+          </SnippetMetaBox>
         </DescriptionBox>
       </Wrapper>
     );

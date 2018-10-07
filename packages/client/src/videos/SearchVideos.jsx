@@ -14,7 +14,7 @@ const Wrapper = styled.ul`
 `;
 
 const Li = styled.li`
-  margin-top: 8px;
+  margin-top: 16px;
 
   &:first-child {
     margin-top: 0;
