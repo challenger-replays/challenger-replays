@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "proxy": "http://localhost:4000",
   "dependencies": {
+    "hoist-non-react-statics": "^3.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
