@@ -21,3 +21,7 @@ export const rowSnippet = PropTypes.shape({
   videoId: string.isRequired,
   videoUrl: string.isRequired,
 });
+
+export const trackableViewport = PropTypes.shape({
+  isMobile: PropTypes.bool.isRequired,
+});

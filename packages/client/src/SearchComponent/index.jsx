@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { trackableViewport } from '../hocs';
+import * as PropTypesRepo from '../types';
 import Form from './Form';
 import Input from './Input';
 import Reset from './Reset';
@@ -57,6 +59,7 @@ class SearchComponent extends React.Component {
   }
 
   render() {
+    const { isMobile } = this.props.viewport;
     const { searchQuery } = this.state;
     const isCrossVisible = 0 !== searchQuery.length;
     return (
@@ -67,7 +70,7 @@ class SearchComponent extends React.Component {
           value={searchQuery}
         />
         {isCrossVisible && <Reset onClick={this.onResetClick} />}
-        <Submit primary={isCrossVisible} />
+        <Submit primary={isMobile || isCrossVisible} />
       </Form>
     );
   }
@@ -79,6 +82,7 @@ SearchComponent.propTypes = {
     query: PropTypes.string,
   }),
   onSearch: PropTypes.func,
+  viewport: PropTypesRepo.trackableViewport,
 };
 
 SearchComponent.defaultProps = {
@@ -88,4 +92,4 @@ SearchComponent.defaultProps = {
   },
 };
 
-export default SearchComponent;
+export default trackableViewport(SearchComponent);
