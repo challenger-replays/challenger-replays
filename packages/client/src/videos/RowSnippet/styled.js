@@ -20,4 +20,5 @@ export const ThumbnailBox = styled.div`
   flex-grow: 0;
   flex-shrink: 0;
   width: 120px;
+  min-height: 90px;
 `;
