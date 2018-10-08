@@ -1,7 +1,7 @@
 {
   "extends": ["tslint:recommended", "tslint-config-prettier"],
   "linterOptions": {
-    "exclude": ["node_modules/**/*.ts", "**/*.js", "**/*.jsx"]
+    "exclude": ["**/node_modules/**/*.ts", "**/*.js", "**/*.jsx"]
   },
   "rules": {
     "arrow-parens": [true, "ban-single-arg-parens"],
