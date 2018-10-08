@@ -20,11 +20,12 @@ export function mapSearchListsToSnippet(lists: SearchList[]): Snippet[] {
   return items.map(item => {
     const { id, snippet } = item;
     const { videoId } = id;
-    const { channelId, channelTitle, title, publishedAt } = snippet;
+    const { channelId, channelTitle, description, title, publishedAt } = snippet;
     return {
       channelId,
       channelTitle,
       channelUrl: makeYoutubeChannelUrl(channelId),
+      description,
       publishedAt,
       title,
       thumbnails: mapItemThumbnails(snippet),

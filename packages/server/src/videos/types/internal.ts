@@ -8,6 +8,7 @@ export interface Snippet extends Dated {
   channelId: string;
   channelTitle: string;
   channelUrl: string;
+  description: string;
   title: string;
   thumbnails: Thumbnail;
   videoId: string;

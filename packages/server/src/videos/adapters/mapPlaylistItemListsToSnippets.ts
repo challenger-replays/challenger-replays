@@ -15,12 +15,13 @@ function isFresh(item: dates.Dated) {
 
 function mapItemToSnippet(item: PlaylistItemListItem): Snippet {
   const { snippet } = item;
-  const { channelId, channelTitle, title, publishedAt } = snippet;
+  const { channelId, channelTitle, description, title, publishedAt } = snippet;
   const { videoId } = snippet.resourceId;
   return {
     channelId,
     channelTitle,
     channelUrl: makeYoutubeChannelUrl(channelId),
+    description,
     publishedAt,
     title,
     thumbnails: mapItemThumbnails(snippet),
