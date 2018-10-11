@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import styled from 'styled-components';
 import UrlSearchParams from 'url-search-params';
@@ -44,6 +44,11 @@ class Search extends React.Component {
 
   render() {
     const { query, snippets } = this.state;
+
+    if (!query) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <React.Fragment>
         <HeaderBlock>
