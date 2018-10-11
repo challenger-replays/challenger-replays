@@ -15,6 +15,7 @@ export const rowSnippet = PropTypes.shape({
   channelId: string.isRequired,
   channelTitle: string.isRequired,
   channelUrl: string.isRequired,
+  description: string.isRequired,
   publishedAt: string.isRequired,
   title: string.isRequired,
   thumbnail: PropTypes.string.isRequired,

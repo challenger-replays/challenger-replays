@@ -4,7 +4,11 @@ import * as PropTypesRepo from '../../types';
 import Url from '../Url';
 import { AChannel, AVideo, Img } from '../styled';
 import PublishedAt from '../PublishedAt';
-import { DescriptionBox, SnippetMetaBox, ThumbnailBox } from './styled';
+import {
+  DescriptionBox as SharedDescriptionBox,
+  SnippetMetaBox,
+  ThumbnailBox,
+} from './styled';
 
 const Wrapper = styled.div`
   display: block;
@@ -25,11 +29,26 @@ const DetailsBox = styled.div`
   width: 100%;
 `;
 
+const DescriptionBox = styled(SharedDescriptionBox)`
+  justify-content: flex-start;
+`;
+
+const Description = styled.p`
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.15rem;
+  max-height: 3.45rem;
+  font-size: 13px;
+`;
+
 class DesktopSnippet extends React.Component {
   render() {
     const {
       channelTitle,
       channelUrl,
+      description,
       publishedAt,
       title,
       thumbnail,
@@ -49,6 +68,7 @@ class DesktopSnippet extends React.Component {
               <Url href={channelUrl} title={channelTitle} StyledA={AChannel} />
               <PublishedAt at={publishedAt} prefix=" - " />
             </SnippetMetaBox>
+            <Description>{description}</Description>
           </DescriptionBox>
         </DetailsBox>
       </Wrapper>
