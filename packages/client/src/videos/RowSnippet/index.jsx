@@ -19,6 +19,7 @@ class RowSnippet extends React.PureComponent {
 
 RowSnippet.propTypes = {
   details: PropTypesRepo.snippet.isRequired,
+  viewport: PropTypesRepo.trackableViewport.isRequired,
 };
 
 export default trackableViewport(RowSnippet);
