@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Home from './Home';
 import Search from './Search';
 
@@ -16,15 +16,25 @@ const theme = {
   borderRadius: '3px',
 };
 
+const GlobalStyle = createGlobalStyle`
+  body,
+  input {
+    color: ${p => p.theme.text};
+  }
+`;
+
 class App extends React.Component {
   render() {
     const { search } = this.props.location;
     return (
       <ThemeProvider theme={theme}>
-        <Switch>
-          <Route path="/search" component={Search} key={search} />
-          <Route exact path="/" component={Home} />
-        </Switch>
+        <React.Fragment>
+          <Switch>
+            <Route path="/search" component={Search} key={search} />
+            <Route exact path="/" component={Home} />
+          </Switch>
+          <GlobalStyle />
+        </React.Fragment>
       </ThemeProvider>
     );
   }
