@@ -4,6 +4,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import styled from 'styled-components';
 import UrlSearchParams from 'url-search-params';
 import SearchComponent from '../SearchComponent';
+import NoVideos from '../videos/NoVideos';
 import SearchVideos from '../videos/SearchVideos';
 import HeaderBlock from './HeaderBlock';
 import Logo from './Logo';
@@ -13,6 +14,10 @@ const SearchVideosBox = styled.div`
   padding-right: 8px;
   padding-bottom: 16px;
   padding-left: 8px;
+
+  @media (min-width: 1024px) {
+    padding-left: 96px;
+  }
 `;
 
 class Search extends React.Component {
@@ -42,8 +47,27 @@ class Search extends React.Component {
       .catch(e => console.error(`An error occured: ${e}`));
   }
 
-  render() {
+  renderVideosBox() {
     const { query, snippets } = this.state;
+
+    if (!snippets) {
+      // not loaded yet
+      return null;
+    }
+
+    return (
+      <SearchVideosBox>
+        {0 === snippets.length ? (
+          <NoVideos query={query} />
+        ) : (
+          <SearchVideos snippets={snippets} />
+        )}
+      </SearchVideosBox>
+    );
+  }
+
+  render() {
+    const { query } = this.state;
 
     if (!query) {
       return <Redirect to="/" />;
@@ -57,9 +81,7 @@ class Search extends React.Component {
           </Link>
           <SearchComponent initial={{ query }} onSearch={this.onSearch} />
         </HeaderBlock>
-        <SearchVideosBox>
-          <SearchVideos snippets={snippets} />
-        </SearchVideosBox>
+        {this.renderVideosBox()}
       </React.Fragment>
     );
   }

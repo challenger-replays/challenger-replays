@@ -7,10 +7,6 @@ const Wrapper = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-
-  @media (min-width: 1024px) {
-    padding-left: 88px;
-  }
 `;
 
 const Li = styled.li`
