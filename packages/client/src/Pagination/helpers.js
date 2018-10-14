@@ -1,3 +1,11 @@
+export function getPaginationProps({ limit, offset, total }) {
+  const extraPages = 0 === offset % limit ? 0 : 1;
+  return {
+    pages: Math.ceil(total / limit) + extraPages,
+    current: Math.ceil(offset / limit) + 1,
+  };
+}
+
 export function getPagesSubset(current, total, subsetLength) {
   let currentPosition = Math.floor(subsetLength / 2) + 1;
   const hasEnoughNext = current + (subsetLength - currentPosition) <= total;
