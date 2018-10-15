@@ -9,6 +9,7 @@
   "plugins": ["import", "react"],
   "extends": "airbnb-base",
   "rules": {
+    "no-plusplus": "off",
     "no-unused-vars": "warn",
     "yoda": "off",
     "react/jsx-key": "error",
