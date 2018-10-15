@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -31,5 +32,11 @@ class Page extends React.Component {
     );
   }
 }
+
+Page.propTypes = {
+  active: PropTypes.bool,
+  text: PropTypes.string.isRequired,
+  onPageClick: PropTypes.func,
+};
 
 export default Page;
