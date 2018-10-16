@@ -12,13 +12,25 @@ const Ul = styled.ul`
 `;
 
 class Pagination extends React.PureComponent {
+  makeHref(page) {
+    const { makeHref } = this.props;
+    return makeHref ? makeHref(page) : undefined;
+  }
+
   renderNextPage() {
     const { current, pages } = this.props;
     if (current === pages) {
       return null;
     }
 
-    return <Page key="Next" text="Next" onPageClick={this.props.onPageClick} />;
+    return (
+      <Page
+        key="Next"
+        href={this.makeHref(current + 1)}
+        text="Next"
+        onPageClick={this.props.onPageClick}
+      />
+    );
   }
 
   renderPreviousPage() {
@@ -30,6 +42,7 @@ class Pagination extends React.PureComponent {
     return (
       <Page
         key="Previous"
+        href={this.makeHref(current - 1)}
         text="Previous"
         onPageClick={this.props.onPageClick}
       />
@@ -47,6 +60,7 @@ class Pagination extends React.PureComponent {
         {pagesSubset.map(page => (
           <Page
             key={page}
+            href={this.makeHref(page)}
             text={page}
             onPageClick={onPageClick}
             active={page === current}
@@ -62,6 +76,7 @@ Pagination.propTypes = {
   subsetLength: PropTypes.number.isRequired,
   pages: PropTypes.number.isRequired,
   current: PropTypes.number.isRequired,
+  makeHref: PropTypes.func,
   onPageClick: PropTypes.func,
 };
 

@@ -10,7 +10,7 @@ const Li = styled.li`
 `;
 
 const A = styled.a`
-  color: ${p => (p.active ? p.theme.text : p.theme.accent)};
+  color: ${p => (p.active ? p.theme.text : '#4285f4')};
   font-size: 13px;
   text-decoration: none;
 
@@ -22,10 +22,12 @@ const A = styled.a`
 
 class Page extends React.Component {
   render() {
-    const { active, text, onPageClick } = this.props;
+    const {
+      active, href, text, onPageClick,
+    } = this.props;
     return (
       <Li>
-        <A href="/" onClick={onPageClick} active={active}>
+        <A href={href || '/'} onClick={onPageClick} active={active}>
           {text}
         </A>
       </Li>
@@ -35,6 +37,7 @@ class Page extends React.Component {
 
 Page.propTypes = {
   active: PropTypes.bool,
+  href: PropTypes.string,
   text: PropTypes.string.isRequired,
   onPageClick: PropTypes.func,
 };
