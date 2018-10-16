@@ -8,6 +8,7 @@ import NoVideos from '../videos/NoVideos';
 import SearchVideos from '../videos/SearchVideos';
 import HeaderBlock from './HeaderBlock';
 import Logo from './Logo';
+import Pagination, { getPaginationProps } from '../Pagination';
 
 const SearchVideosBox = styled.div`
   padding-top: 16px;
@@ -31,8 +32,20 @@ class Search extends React.Component {
     };
   }
 
+  makeHref = (page) => {
+    const { query, limit } = this.state;
+    const offset = limit * (page - 1);
+    return `/search?q=${query}&offset=${offset}`;
+  };
+
   onSearch = (query) => {
     this.props.history.push(`/search?q=${query}`);
+  };
+
+  onPageClick = (e) => {
+    e.preventDefault();
+    const { target } = e;
+    this.props.history.push(`${target.pathname}${target.search}`);
   };
 
   componentDidMount() {
@@ -45,6 +58,21 @@ class Search extends React.Component {
       .then(response => response.json())
       .then(json => this.setState({ ...json }))
       .catch(e => console.error(`An error occured: ${e}`));
+  }
+
+  renderPagination() {
+    const { limit, offset, total } = this.state;
+    if ([limit, offset, total].some(value => !Number.isInteger(value))) {
+      return null;
+    }
+    const props = getPaginationProps({ limit, offset, total });
+    return (
+      <Pagination
+        {...props}
+        makeHref={this.makeHref}
+        onPageClick={this.onPageClick}
+      />
+    );
   }
 
   renderVideosBox() {
@@ -82,6 +110,7 @@ class Search extends React.Component {
           <SearchComponent initial={{ query }} onSearch={this.onSearch} />
         </HeaderBlock>
         {this.renderVideosBox()}
+        {this.renderPagination()}
       </React.Fragment>
     );
   }
