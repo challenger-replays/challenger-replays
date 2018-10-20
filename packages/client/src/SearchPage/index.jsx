@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import styled from 'styled-components';
 import UrlSearchParams from 'url-search-params';
-import SearchComponent from '../SearchComponent';
+import SearchForm from '../SearchForm';
 import NoVideos from '../videos/NoVideos';
 import SearchVideos from '../videos/SearchVideos';
 import HeaderBlock from './HeaderBlock';
@@ -111,7 +111,7 @@ class Search extends React.Component {
           <Link to="/">
             <Logo />
           </Link>
-          <SearchComponent initial={{ query }} onSearch={this.onSearch} />
+          <SearchForm initial={{ query }} onSearch={this.onSearch} />
         </HeaderBlock>
         <Section>
           {this.renderVideosBox()}

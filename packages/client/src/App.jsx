@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import Home from './Home';
-import Search from './Search';
+import HomePage from './HomePage';
+import SearchPage from './SearchPage';
 
 const theme = {
   primary: '#ffb300',
@@ -30,8 +30,8 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <React.Fragment>
           <Switch>
-            <Route path="/search" component={Search} key={search} />
-            <Route exact path="/" component={Home} />
+            <Route path="/search" component={SearchPage} key={search} />
+            <Route exact path="/" component={HomePage} />
           </Switch>
           <GlobalStyle />
         </React.Fragment>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import SearchComponent from '../SearchComponent';
+import SearchForm from '../SearchForm';
 import { trackableViewport } from '../hocs';
 import { H1 } from '../styled';
 import * as PropTypesRepo from '../types';
@@ -25,7 +25,7 @@ class Home extends React.Component {
             <Logo />
             <H1 primary>Challenger Replays</H1>
           </MeetingBlock>
-          <SearchComponent initial={{ isFocused }} onSearch={this.onSearch} />
+          <SearchForm initial={{ isFocused }} onSearch={this.onSearch} />
         </SearchBlock>
         <LatestVideos />
       </Wrapper>
