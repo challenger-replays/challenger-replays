@@ -21,6 +21,10 @@ const SearchVideosBox = styled.div`
   }
 `;
 
+const Section = styled.section`
+  padding-bottom: 32px;
+`;
+
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -109,8 +113,10 @@ class Search extends React.Component {
           </Link>
           <SearchComponent initial={{ query }} onSearch={this.onSearch} />
         </HeaderBlock>
-        {this.renderVideosBox()}
-        {this.renderPagination()}
+        <Section>
+          {this.renderVideosBox()}
+          {this.renderPagination()}
+        </Section>
       </React.Fragment>
     );
   }

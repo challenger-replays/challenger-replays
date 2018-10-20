@@ -8,7 +8,16 @@ const Ul = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: center;
   list-style-type: none;
+  margin: 0;
+  margin-top: 8px;
+  padding: 0;
+
+  @media (min-width: 1024px) {
+    justify-content: start;
+    padding-left: 96px;
+  }
 `;
 
 class Pagination extends React.PureComponent {
