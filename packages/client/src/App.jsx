@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
   body,
   input {
     color: ${p => p.theme.text};
+    line-height: 1.2;
   }
 `;
 
