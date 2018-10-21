@@ -56,6 +56,7 @@ export class DataSource {
     if (!Number.isInteger(limit)) {
       limit = 10;
     }
+    limit = Math.max(10, limit);
 
     const key = normalizeKey(`${KEY_SEARCH}:${query}`);
     const end = offset + limit;
