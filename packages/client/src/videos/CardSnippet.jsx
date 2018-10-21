@@ -2,12 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import * as PropTypesRepo from '../types';
 import Url from './Url';
-import { AChannel, AVideo, Img } from './styled';
+import { AChannel, AVideo, Img as BaseImg } from './styled';
 
 const Wrapper = styled.div`
   width: 210px;
   margin-right: 4px;
   margin-bottom: 24px;
+`;
+
+const Img = styled(BaseImg)`
+  min-height: 157.5px;
 `;
 
 class CardSnippet extends React.PureComponent {
