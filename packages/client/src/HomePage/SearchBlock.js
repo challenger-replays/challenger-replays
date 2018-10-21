@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 const SearchBlock = styled.section`
+  flex-grow: 0;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;

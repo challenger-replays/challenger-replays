@@ -1,20 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-import { H2, Videos } from './styled';
+import { H2 as H2Base, Videos } from './styled';
 import CardSnippet from './CardSnippet';
 
 const Wrapper = styled.section`
-  display: none;
-  background-color: ${p => p.theme.primary};
-  overflow-x: none;
-  overflow-y: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: block;
+  width: 100%;
+  padding-top: 32px;
+  background-color: inherit;
 
   @media (min-width: 1024px) {
-    display: block;
-    width: 36%;
+    max-width: 36%;
     height: 100vh;
-    padding-right: 0px;
+    padding: 0;
     padding-left: 48px;
+    background-color: ${p => p.theme.primary};
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+`;
+
+const H2 = styled(H2Base)`
+  text-align: center;
+
+  @media (min-width: 1024px) {
+    text-align: left;
   }
 `;
 

@@ -34,7 +34,11 @@ export const Videos = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-content: flex-start;
   align-items: flex-start;
+
+  @media (min-width: 1024px) {
+    justify-content: flex-start;
+  }
 `;
