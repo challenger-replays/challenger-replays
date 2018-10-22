@@ -52,6 +52,7 @@ export class DataSource {
     if (!Number.isInteger(offset)) {
       offset = 0;
     }
+    offset = Math.max(0, offset);
 
     if (!Number.isInteger(limit)) {
       limit = 10;
