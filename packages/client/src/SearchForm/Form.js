@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const Form = styled.form`
+const Form = styled.form.attrs({
+  action: '#',
+})`
   display: flex;
   width: 96%;
   max-width: 500px;

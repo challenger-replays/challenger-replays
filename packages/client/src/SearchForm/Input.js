@@ -3,7 +3,7 @@ import { Input as CommonInput } from '../styled';
 
 const Input = styled(CommonInput).attrs({
   placeholder: 'Find champions, players and more...',
-  type: 'text',
+  type: 'search',
 })`
   flex-grow: 1;
   flex-shrink: 0;
