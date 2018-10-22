@@ -69,4 +69,16 @@ describe('getPaginationProps', () => {
       pages: 2,
     });
   });
+
+  test('Zero total', () => {
+    const arg = {
+      limit: 10,
+      offset: 0,
+      total: 0,
+    };
+    expect(getPaginationProps(arg)).toEqual({
+      current: 0,
+      pages: 0,
+    });
+  });
 });

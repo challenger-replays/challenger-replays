@@ -1,4 +1,11 @@
 export function getPaginationProps({ limit, offset, total }) {
+  if (0 === total) {
+    return {
+      pages: 0,
+      current: 0,
+    };
+  }
+
   const extraPages = 0 === offset % limit ? 0 : 1;
   return {
     pages: Math.ceil(total / limit) + extraPages,

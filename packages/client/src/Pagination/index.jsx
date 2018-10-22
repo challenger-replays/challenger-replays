@@ -62,6 +62,11 @@ class Pagination extends React.PureComponent {
     const {
       current, pages, subsetLength, onPageClick,
     } = this.props;
+
+    if (0 === pages) {
+      return null;
+    }
+
     const pagesSubset = getPagesSubset(current, pages, subsetLength);
     return (
       <Ul>
