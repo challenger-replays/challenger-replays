@@ -16,6 +16,10 @@ describe('getPagesSubset', () => {
     expect(getPagesSubset(2, 5, 8)).toEqual([1, 2, 3, 4, 5]);
     expect(getPagesSubset(4, 5, 8)).toEqual([1, 2, 3, 4, 5]);
   });
+
+  test('Zero Total', () => {
+    expect(getPagesSubset(0, 0, 10)).toEqual([]);
+  });
 });
 
 describe('getPaginationProps', () => {
