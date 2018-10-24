@@ -9,6 +9,10 @@ const Input = styled(CommonInput).attrs({
   flex-shrink: 0;
   border: none;
   background: inherit;
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
 `;
 
 export default Input;
