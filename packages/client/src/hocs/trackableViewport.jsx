@@ -36,10 +36,17 @@ export function trackableViewport(WrappedComponent) {
     }
 
     render() {
+      const { forwardedRef } = this.props;
       const viewport = {
         isMobile: this.state.isMobile,
       };
-      return <WrappedComponent viewport={viewport} {...this.props} />;
+      return (
+        <WrappedComponent
+          viewport={viewport}
+          ref={forwardedRef}
+          {...this.props}
+        />
+      );
     }
   }
 
@@ -47,5 +54,9 @@ export function trackableViewport(WrappedComponent) {
     WrappedComponent,
   )})`;
 
-  return hoistNonReactStatics(TrackableViewport, WrappedComponent);
+  const HoistComponent = React.forwardRef((props, ref) => (
+    <TrackableViewport {...props} forwardedRef={ref} />
+  ));
+
+  return hoistNonReactStatics(HoistComponent, WrappedComponent);
 }
