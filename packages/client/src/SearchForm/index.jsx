@@ -52,10 +52,41 @@ class SearchComponent extends React.Component {
     }
   };
 
+  tapHandler = {
+    hasMove: false,
+    onTap: (e) => {
+      const isSearchTarget = [...e.changedTouches].some(
+        ({ target }) => target === this.searchInput.ref.current,
+      );
+      if (!isSearchTarget) {
+        this.searchInput.ref.current.blur();
+      }
+    },
+  };
+
+  onTouchmove = (e) => {
+    this.tapHandler.hasMove = true;
+  };
+
+  onTouchend = (e) => {
+    if (!this.tapHandler.hasMove) {
+      this.tapHandler.onTap(e);
+    }
+    this.tapHandler.hasMove = false;
+  };
+
   componentDidMount() {
     if (this.props.initial.isFocused) {
       this.searchInput.focus();
     }
+
+    window.addEventListener('touchmove', this.onTouchmove, false);
+    window.addEventListener('touchend', this.onTouchend, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('touchmove', this.onTouchmove);
+    window.removeEventListener('touchend', this.onTouchend);
   }
 
   render() {
