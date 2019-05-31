@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  web:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/code
+    environment:
+      FLASK_ENV: development
+    depends_on:
+      - redis
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379"
