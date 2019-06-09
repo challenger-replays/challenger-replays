@@ -14,6 +14,8 @@ class Client {
 
   constructor() {
     const client = redis.createClient({
+      host: 'redis',
+      port: 6379,
       enable_offline_queue: false,
     });
     client.on('error', error => console.error(`Redis client error: ${error}`));

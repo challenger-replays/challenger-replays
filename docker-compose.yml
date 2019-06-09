@@ -3,11 +3,13 @@ services:
   web:
     build: .
     ports:
-      - "4000:4000"
+      - "4000"
     volumes:
       - .:/code
-    environment:
-      FLASK_ENV: development
+      - /code/node_modules
+      - /code/packages/server/node_modules
+    # environment:
+      # FLASK_ENV: development
     depends_on:
       - redis
   redis:
