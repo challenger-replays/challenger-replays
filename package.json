@@ -10,7 +10,12 @@
   ],
   "scripts": {
     "lint": "yarn lint:eslint",
-    "lint:eslint": "eslint --ext .js --ext .jsx packages"
+    "lint:eslint": "eslint --ext .js --ext .jsx packages",
+    "start": "yarn start:server && yarn start:client",
+    "start:client": "cd packages/client && yarn start",
+    "start:server": "docker-compose up -d",
+    "start:server:build": "docker-compose up --build -d",
+    "stop:server": "docker-compose down --volumes"
   },
   "husky": {
     "hooks": {
