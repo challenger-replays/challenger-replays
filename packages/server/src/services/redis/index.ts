@@ -9,7 +9,7 @@ class Client {
     llen: (key: string) => Promise<number>;
     lrange: (key: string, start: number, stop: number) => Promise<string[]>;
     rpush: (key: string, values: any[]) => Promise<number>;
-    setex: (key: string, seconds: number, value: string) => Promise<'OK'>;
+    setex: (key: string, seconds: number, value: string) => Promise<string>;
   };
 
   constructor() {
