@@ -4,9 +4,9 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "identifier": "typescript",
+      "label": "CompileTS",
       "type": "typescript",
-      "tsconfig": "tsconfig.json",
+      "tsconfig": "packages/server/tsconfig.json",
       "problemMatcher": [
         "$tsc"
       ]

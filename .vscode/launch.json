@@ -8,12 +8,12 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Node",
-      "program": "${workspaceFolder}/dist/index.js",
-      "preLaunchTask": "typescript",
+      "program": "${workspaceFolder}/packages/server/dist/src/index.js",
+      "preLaunchTask": "CompileTS",
       "cwd": "${workspaceFolder}",
       "protocol": "inspector",
       "outFiles": [
-        "${workspaceFolder}/dist/**/*.js"
+        "${workspaceFolder}/packages/server/dist/**/*.js"
       ]
     }
   ]
